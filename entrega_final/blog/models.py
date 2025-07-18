@@ -1,10 +1,10 @@
 from django.db import models
-from ckeditor.fields import RichTextField  # Si usás ckeditor
+from ckeditor.fields import RichTextField 
 
 class Page(models.Model):
     titulo = models.CharField(max_length=200)
     subtitulo = models.CharField(max_length=200)
-    contenido = RichTextField()  # o models.TextField()
+    contenido = RichTextField()  
     imagen = models.ImageField(upload_to='pages/')
     fecha_creacion = models.DateField(auto_now_add=True)
 
