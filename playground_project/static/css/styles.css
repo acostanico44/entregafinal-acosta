@@ -1,0 +1,45 @@
+/* Estilo global básico */
+body {
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Hover y animaciones en tarjetas */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+/* Estilo en botones */
+.btn {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btn:hover {
+  transform: scale(1.03);
+}
+
+/* Footer oscuro */
+footer {
+  font-size: 0.9rem;
+}
+
+/* Espaciado entre comentarios */
+.comment {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+/* Formulario de comentario */
+textarea.form-control {
+  resize: none;
+}
+
+/* Transición suave en alertas */
+.alert {
+  transition: all 0.3s ease;
+}

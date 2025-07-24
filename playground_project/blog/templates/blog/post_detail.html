@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.titulo }}{% endblock %}
+
+{% block content %}
+<h2>{{ post.titulo }}</h2>
+<h5>{{ post.subtitulo }}</h5>
+<p><strong>Publicado el:</strong> {{ post.fecha_publicacion }}</p>
+
+{% if post.imagen %}
+  <img src="{{ post.imagen.url }}" class="img-fluid mb-3" alt="{{ post.titulo }}">
+{% endif %}
+
+<div>{{ post.contenido|safe }}</div>
+
+{% if user == post.autor %}
+  <hr>
+  <a href="{% url 'post_update' post.pk %}" class="btn btn-warning">
+    <i class="bi bi-pencil-square"></i> Editar
+  </a>
+  <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">
+    <i class="bi bi-trash"></i> Eliminar
+  </a>
+{% endif %}
+
+<hr class="mt-5">
+
+<h3 class="mt-4">💬 Comentarios</h3>
+
+{% for comentario in comentarios %}
+  <div class="border rounded p-3 mb-3 shadow-sm">
+    <strong>{{ comentario.autor.username }}</strong>  
+    <small class="text-muted">{{ comentario.fecha|date:"d M Y - H:i" }}</small>
+    <p class="mt-2">{{ comentario.contenido }}</p>
+  </div>
+{% empty %}
+  <p class="text-muted">Aún no hay comentarios.</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+  <form method="post" class="mt-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-send-fill"></i> Comentar
+    </button>
+  </form>
+{% else %}
+  <p class="mt-4">Iniciá sesión para comentar.</p>
+  <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm">Iniciar sesión</a>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Mi Perfil{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4" style="max-width: 700px; margin: auto;">
+    <div class="d-flex align-items-center mb-4">
+        {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;">
+            <img src="{{ user.profile.imagen.url }}" class="rounded-circle shadow" 
+     style="width: 120px; height: 120px; object-fit: cover;">
+
+        {% else %}
+            <div class="bg-secondary text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 80px; height: 80px;">
+                {{ user.first_name|default:user.username|slice:":1" }}
+            </div>
+        {% endif %}
+        <div>
+            <h3 class="fw-bold mb-0">{{ user.first_name }} {{ user.last_name }}</h3>
+            <p class="mb-0 text-muted">{{ user.email }}</p>
+        </div>
+    </div>
+
+    <hr>
+    <dl class="row">
+        <dt class="col-sm-4">Biografía:</dt>
+        <dd class="col-sm-8">{{ user.profile.biografia }}</dd>
+
+        <dt class="col-sm-4">Fecha de nacimiento:</dt>
+        <dd class="col-sm-8">{{ user.profile.fecha_nacimiento|date:"d/m/Y" }}</dd>
+    </dl>
+
+    <div class="text-end mt-3">
+        <a href="{% url 'edit_profile' %}" class="btn btn-primary">Editar perfil</a>
+        <a href="{% url 'password_change' %}" class="btn btn-secondary">Cambiar contraseña</a>
+    </div>
+</div>
+{% endblock %}

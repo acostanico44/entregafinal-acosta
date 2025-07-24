@@ -1,0 +1,36 @@
+# Django: archivos sensibles o temporales
+db.sqlite3
+media/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales comunes
+env/
+venv/
+ENV/
+.venv/
+.venv.bak/
+
+# Configuraciones locales
+.env
+*.log
+
+# Archivos y carpetas generadas por editores
+.vscode/
+.idea/
+*.swp
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de compilación / empaquetado
+*.egg-info/
+*.egg/
+build/
+dist/
+
+# Migraciones innecesarias
+**/migrations/*.pyc
+**/migrations/*.pyo

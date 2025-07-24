@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Página no encontrada{% endblock %}
+{% block content %}
+<div class="text-center p-5">
+    <h2 class="text-warning">🕵️‍♂️ ¡Uy! Esa página no existe</h2>
+    <p class="lead">Es posible que el enlace esté roto o la publicación haya sido eliminada.</p>
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3">Volver al inicio</a>
+    <a href="{% url 'post_list' %}" class="btn btn-outline-secondary mt-2">Ver publicaciones</a>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="p-5 text-center bg-light rounded shadow-sm">
+    <h1 class="display-4 fw-bold" style="font-family: 'Playfair Display', serif;">
+        Bienvenido a mi espacio digital
+    </h1>
+    <p class="lead mt-3">
+        Compartiendo ideas, código y diseño con claridad y propósito.
+    </p>
+    <a href="{% url 'post_list' %}" class="btn btn-primary btn-lg mt-4">
+        <i class="bi bi-journal-text"></i> Ver publicaciones
+    </a>
+</div>
+
+<h2 class="mt-5 mb-3 text-center">Últimas publicaciones</h2>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for post in latest_posts %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                {% if post.imagen %}
+                <img src="{{ post.imagen.url }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.titulo }}</h5>
+                    <p class="card-text">{{ post.subtitulo }}</p>
+                    <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-eye"></i> Leer más
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-center">No hay publicaciones disponibles.</p>
+    {% endfor %}
+</div>
+{% endblock %}

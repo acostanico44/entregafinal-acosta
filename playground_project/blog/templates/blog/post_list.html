@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Publicaciones{% endblock %}
+
+{% block content %}
+<h2>Publicaciones</h2>
+
+<form method="get" class="mb-4 d-flex align-items-center gap-2">
+  <label for="orden" class="form-label mb-0">Ordenar por:</label>
+  <select name="orden" id="orden" class="form-select w-auto" onchange="this.form.submit()">
+    <option value="-fecha_publicacion" {% if request.GET.orden == "-fecha_publicacion" or not request.GET.orden %}selected{% endif %}>Más recientes</option>
+    <option value="fecha_publicacion" {% if request.GET.orden == "fecha_publicacion" %}selected{% endif %}>Más antiguas</option>
+  </select>
+</form>
+
+{% if posts %}
+  <div class="row">
+    {% for post in posts %}
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+          {% if post.imagen %}
+            <img src="{{ post.imagen.url }}" class="card-img-top" alt="{{ post.titulo }}" style="object-fit: cover; height: 200px;">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ post.titulo }}</h5>
+            <p class="card-text">{{ post.subtitulo }}</p>
+            <p class="text-muted mb-2"><small>Publicado el {{ post.fecha_publicacion|date:"d M Y" }}</small></p>
+            <a href="{% url 'post_detail' post.pk %}" class="btn btn-outline-primary btn-sm">
+              <i class="bi bi-eye"></i> Leer más
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No hay publicaciones disponibles.</p>
+{% endif %}
+{% endblock %}

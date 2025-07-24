@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Editar Perfil{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4" style="max-width: 700px; margin: auto;">
+    <h2 class="mb-4">Editar mi perfil</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_first_name" class="form-label">Nombre</label>
+            {{ form.first_name }}
+        </div>
+        <div class="mb-3">
+            <label for="id_last_name" class="form-label">Apellido</label>
+            {{ form.last_name }}
+        </div>
+        <div class="mb-3">
+            <label for="id_email" class="form-label">Email</label>
+            {{ form.email }}
+        </div>
+        <div class="mb-3">
+            <label for="id_biografia" class="form-label">Biografía</label>
+            {{ form.biografia }}
+        </div>
+        <div class="mb-3">
+            <label for="id_fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
+            {{ form.fecha_nacimiento }}
+        </div>
+        <div class="mb-3">
+            <label for="id_avatar" class="form-label">Avatar</label>
+            {{ form.avatar }}
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a href="{% url 'profile' %}" class="btn btn-secondary ms-2">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

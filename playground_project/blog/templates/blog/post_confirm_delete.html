@@ -1,0 +1,11 @@
+<!-- templates/blog/post_confirm_delete.html -->
+{% extends 'base.html' %}
+{% block title %}Eliminar{% endblock %}
+{% block content %}
+<h2>¿Estás seguro que querés eliminar "{{ object.titulo }}"?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirmar</button>
+    <a href="{% url 'post_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

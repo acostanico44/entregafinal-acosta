@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Registrarse{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4" style="max-width: 600px; margin: auto;">
+    <h2 class="mb-4">Crear una cuenta</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-3">
+                <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="text-danger">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Registrarme</button>
+        <a href="{% url 'login' %}" class="btn btn-link">¿Ya tenés cuenta?</a>
+    </form>
+</div>
+{% endblock %}

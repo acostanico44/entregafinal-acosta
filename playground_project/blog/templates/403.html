@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Acceso denegado{% endblock %}
+{% block content %}
+<div class="text-center p-5">
+    <h2 class="text-danger">🚫 No tenés permiso para acceder a esta página</h2>
+    <p class="lead">Si pensás que esto fue un error, podés volver a la página anterior o contactar al administrador.</p>
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3">Volver al inicio</a>
+</div>
+{% endblock %}
