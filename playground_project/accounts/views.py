@@ -14,16 +14,21 @@ def profile_view(request):
 
 @login_required
 def edit_profile_view(request):
-    profile = request.user.profile
+    profile, _ = Profile.objects.get_or_create(user=request.user)  # asegúrate de que el perfil exista
+
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile, user=request.user)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             messages.success(request, "Tu perfil fue actualizado con éxito.")
             return redirect('profile')
+        else:
+            print(form.errors)  # para debug
     else:
-        form = ProfileForm(instance=profile, user=request.user)
+        form = ProfileForm(instance=profile)
+
     return render(request, 'accounts/edit_profile.html', {'form': form})
+
 
 def signup_view(request):
     if request.method == 'POST':

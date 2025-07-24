@@ -2,15 +2,25 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
 from django.contrib.auth.forms import PasswordChangeForm
+from datetime import date
 
 class ProfileForm(forms.ModelForm):
     first_name = forms.CharField(label='Nombre', max_length=100)
     last_name = forms.CharField(label='Apellido', max_length=100)
     email = forms.EmailField(label='Email')
-
+    fecha_nacimiento = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        input_formats=['%Y-%m-%d']
+    )
     class Meta:
         model = Profile
         fields = ['avatar', 'biografia', 'fecha_nacimiento']
+
+    def clean_fecha_nacimiento(self):
+        fecha_nacimiento = self.cleaned_data['fecha_nacimiento']
+        if fecha_nacimiento > date.today():
+            raise forms.ValidationError("La fecha no puede ser en el futuro.")
+        return fecha_nacimiento
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
