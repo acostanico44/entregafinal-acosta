@@ -74,3 +74,8 @@ python manage.py runserver
 
 5.
 Acceder a: http://localhost:8000
+
+
+## VIDEO FUNCIONALIDADES DE LA PAGINA.
+
+https://youtu.be/62HHTV0OmtI
